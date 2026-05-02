@@ -1,0 +1,64 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/market",
+      "destination": "/api/market.js"
+    },
+    {
+      "source": "/api/liquidity",
+      "destination": "/api/liquidity.js"
+    },
+    {
+      "source": "/api/attention",
+      "destination": "/api/attention.js"
+    }
+  ],
+  "functions": {
+    "api/market.js": {
+      "maxDuration": 10
+    },
+    "api/liquidity.js": {
+      "maxDuration": 10
+    },
+    "api/attention.js": {
+      "maxDuration": 10
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "s-maxage=30, stale-while-revalidate=60"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.mexc.com https://www.okx.com https://api.binance.com https://api1.binance.com https://api2.binance.com https://api3.binance.com https://fapi.binance.com https://fapi1.binance.com https://fapi2.binance.com https://fapi3.binance.com https://min-api.cryptocompare.com https://api.exchange.coinbase.com https://api.pro.coinbase.com https://api.coinbase.com https://api.coingecko.com https://api.dune.com; worker-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ]
+}
